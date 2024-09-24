@@ -1,17 +1,17 @@
-import React from 'react'
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
-import { Button } from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const App = () => {
+  const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/')
+      .then(res => setMessage(res.data.message))
+  }, [])
+
   return (
     <div>
-      <Button color='error' variant="outlined" startIcon={<DeleteIcon />}>
-        Delete
-      </Button>
-      <Button variant="contained" endIcon={<SendIcon />}>
-        Send
-      </Button>
+      {message}
     </div>
   )
 }
