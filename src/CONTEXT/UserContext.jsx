@@ -10,10 +10,12 @@ const UserProvider = ({ children }) => {
     const nav = useNavigate()
 
     const logout = () => {
-        setCurrentUser(null)
-        setToken('')
-        localStorage.removeItem('token')
-        nav('/login')
+        api.get('/logout').then(() => {
+            setCurrentUser(null)
+            setToken('')
+            localStorage.removeItem('token')
+            nav('/login')
+        })
     }
 
     useEffect(() => {
