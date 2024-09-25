@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import api from '../configs/api'
-import { useUser } from '../CONTEXT/UserContext'
+import { useUser } from '../context/UserContext'
 
 const Blog = () => {
     const { currentUser } = useUser()

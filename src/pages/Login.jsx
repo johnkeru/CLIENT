@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../configs/api';
-import { useUser } from '../CONTEXT/UserContext';
+import { useUser } from '../context/UserContext';
 
 
 const Login = () => {
