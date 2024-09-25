@@ -12,9 +12,9 @@ api.interceptors.request.use(
 )
 export default api
 
-api.get('/users').then(res => {
-    console.log(res.data)
-})
+// api.get('/users').then(res => {
+//     console.log(res.data)
+// })
 
 
 // axios.get('http://localhost:5000/users', {

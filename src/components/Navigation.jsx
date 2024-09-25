@@ -15,25 +15,49 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../CONTEXT/UserContext';
 
 const drawerWidth = 240;
-const navItems = [
-    {
-        path: '/',
-        label: 'Home',
-    },
-    {
-        path: '/about',
-        label: 'About',
-    },
-    {
-        path: '/login',
-        label: 'Login',
-    },
-];
+
 
 function Navigation(props) {
     const nav = useNavigate()
+    const { logout, currentUser } = useUser()
+
+    const navItems = currentUser ?
+        [
+            {
+                path: '/',
+                label: 'Home',
+            },
+            {
+                path: '/about',
+                label: 'About',
+            },
+            {
+                path: '/blog',
+                label: 'Blog',
+            },
+            {
+                path: '/logout',
+                label: 'Logout',
+                onClick: logout,
+            }
+        ]
+        : [
+            {
+                path: '/',
+                label: 'Home',
+            },
+            {
+                path: '/about',
+                label: 'About',
+            },
+            {
+                path: '/login',
+                label: 'Login',
+            },
+        ];
 
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -41,6 +65,11 @@ function Navigation(props) {
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
+
+    const handleNavigate = (navItem) => {
+        if (navItem?.onClick) return navItem.onClick();
+        nav(navItem.path);
+    }
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -51,7 +80,7 @@ function Navigation(props) {
             <List>
                 {navItems.map((item) => (
                     <ListItem key={item.label} disablePadding>
-                        <ListItemButton onClick={() => nav(item.path)} sx={{ textAlign: 'center' }}>
+                        <ListItemButton onClick={() => handleNavigate(item)} sx={{ textAlign: 'center' }}>
                             <ListItemText primary={item.label} />
                         </ListItemButton>
                     </ListItem>
@@ -85,7 +114,7 @@ function Navigation(props) {
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
-                            <Button onClick={() => nav(item.path)} key={item.label} sx={{ color: '#fff' }}>
+                            <Button onClick={() => handleNavigate(item)} key={item.label} sx={{ color: '#fff' }}>
                                 {item.label}
                             </Button>
                         ))}

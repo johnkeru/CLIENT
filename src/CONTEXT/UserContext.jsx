@@ -9,13 +9,22 @@ const UserProvider = ({ children }) => {
     const [token, setToken] = useState('')
     const nav = useNavigate()
 
+    const logout = () => {
+        setCurrentUser(null)
+        setToken('')
+        localStorage.removeItem('token')
+        nav('/login')
+    }
+
     useEffect(() => {
-        api.get('/currentUser', { headers: { Authorization: `Bearer ${token}` } })
-            .then(res => setCurrentUser(res.data.user))
-            .catch(() => nav('/login'))
+        if (token) {
+            api.get('/currentUser', { headers: { Authorization: `Bearer ${token}` } })
+                .then(res => setCurrentUser(res.data.user))
+                .catch(() => nav('/login'))
+        }
     }, [token])
 
-    return <UserContext.Provider value={{ currentUser, setToken }}>
+    return <UserContext.Provider value={{ currentUser, setToken, logout }}>
         {children}
     </UserContext.Provider>
 }
