@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Blog from './pages/Blog'
-import UserProvider from './CONTEXT/UserContext'
+import UserProvider from './context/UserContext'
 
 const App = () => {
   return (
