@@ -31,7 +31,7 @@ const Register = () => {
 
     return (
         <Box sx={{ borderRadius: 2, boxShadow: 5, background: grey[300], p: 5, m: '10vh auto', width: { xs: '100%', sm: '80%', md: '50%', lg: '40%', xl: '30%' } }}>
-            <form action="" onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <Typography variant='h4' sx={{ mb: 4 }}>Sign Up</Typography>
                 <TextField error={!!errors?.username} helperText={errors?.username?.message} {...register('username')} required fullWidth placeholder='Enter your username' sx={{ mb: 1, bgcolor: 'white', }} />
                 <TextField error={!!errors?.password} helperText={errors?.password?.message}  {...register('password')} required fullWidth placeholder='Enter your password' sx={{ bgcolor: 'white' }} />
