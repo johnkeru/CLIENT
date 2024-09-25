@@ -6,10 +6,12 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../configs/api';
+import { useUser } from '../CONTEXT/UserContext';
 
 
 const Login = () => {
     const nav = useNavigate();
+    const { setToken } = useUser();
 
     const validation = Yup.object().shape({
         username: Yup.string()
@@ -28,6 +30,7 @@ const Login = () => {
         api.post('/login', data)
             .then((res) => {
                 localStorage.setItem('token', res.data.token)
+                setToken(res.data.token)
                 nav('/blog')
             }).catch(e => {
                 const errField = e.response.data.field

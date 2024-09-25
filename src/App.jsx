@@ -5,18 +5,21 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Blog from './pages/Blog'
+import UserProvider from './CONTEXT/UserContext'
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Navigation />
-      <Routes>
-        <Route path='/' element={<h1>Home page</h1>} />
-        <Route path='/about' element={<h1>about page</h1>} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/blog' element={<Blog />} />
-      </Routes>
+      <UserProvider>
+        <Navigation />
+        <Routes>
+          <Route path='/' element={<h1>Home page</h1>} />
+          <Route path='/about' element={<h1>about page</h1>} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/blog' element={<Blog />} />
+        </Routes>
+      </UserProvider>
     </BrowserRouter>
   )
 }

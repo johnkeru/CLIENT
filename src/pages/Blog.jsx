@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import api from '../configs/api'
+import { useUser } from '../CONTEXT/UserContext'
 
 const Blog = () => {
-    useEffect(() => {
-        api.get('/currentUser').then(console.log)
-    }, [])
+    const { currentUser } = useUser()
     return (
-        <div>Blog</div>
+        <div>
+            <h1>{currentUser?.username}</h1>
+        </div>
     )
 }
 
