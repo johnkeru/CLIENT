@@ -67,7 +67,7 @@ function Navigation(props) {
     };
 
     const handleNavigate = (navItem) => {
-        if (navItem?.onClick) return navItem.onClick();
+        if (navItem.onClick) return navItem.onClick();
         nav(navItem.path);
     }
 
