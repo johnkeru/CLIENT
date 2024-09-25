@@ -22,4 +22,5 @@ const formatDateTime = (dateToConvert) => {
         return formatDate(date);
     }
 };
+
 export default formatDateTime;

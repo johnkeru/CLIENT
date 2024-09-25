@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const ITEM_HEIGHT = 48;
 
-export default function BlogMenu({ }) {
+export default function BlogMenu({ blog, handleGoToEdit, handleDelete }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -19,10 +19,12 @@ export default function BlogMenu({ }) {
         {
             label: 'Edit',
             icon: <BorderColorIcon />,
+            onClick: () => handleGoToEdit(blog)
         },
         {
             label: 'Delete',
             icon: <DeleteIcon />,
+            onClick: () => handleDelete(blog),
         },
     ];
 
@@ -56,7 +58,7 @@ export default function BlogMenu({ }) {
                 }}
             >
                 {options.map((option) => (
-                    <MenuItem key={option.label} sx={{ gap: 2 }}  >
+                    <MenuItem onClick={() => option.onClick()} key={option.label} sx={{ gap: 2 }}  >
                         {option.icon}
                         {option.label}
                     </MenuItem>

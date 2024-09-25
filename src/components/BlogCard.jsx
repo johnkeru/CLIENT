@@ -16,19 +16,17 @@ import BlogMenu from './BlogMenu';
 
 // CTRL + SHIFT + P
 
-export default function BlogCard({ blog }) {
+export default function BlogCard({ blog, handleDelete, handleGoToEdit }) {
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: '100%', mb: 2, }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
                         {blog.user.username[0].toUpperCase()}
                     </Avatar>
                 }
-                action={
-                    <BlogMenu />
-                }
+                action={<BlogMenu blog={blog} handleGoToEdit={handleGoToEdit} handleDelete={handleDelete} />}
                 title={blog.title}
                 subheader={formatDateTime(blog.createdAt)}
             />
