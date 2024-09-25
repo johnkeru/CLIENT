@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Child from './Child'
 import UserProvider from '../CONTEXT/UserContext'
-import Children from './Children'
 
 const Parent = () => {
     return (
         <UserProvider>
-            <div>
-                Parent
-                <Children />
+            <div>Parent
+                <Child />
             </div>
         </UserProvider>
     )
