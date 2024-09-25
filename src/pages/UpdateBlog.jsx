@@ -16,7 +16,6 @@ const schema = yup.object().shape({
 
 const UpdateBlog = () => {
     const { id } = useParams();
-    const [blog, setBlog] = useState(null);
     const [preview, setPreview] = useState('');
     const nav = useNavigate();
 
@@ -28,7 +27,6 @@ const UpdateBlog = () => {
     useEffect(() => {
         api.get(`/blogs/${id}`)
             .then(response => {
-                setBlog(response.data.blog);
                 // Set default values in the form
                 setValue('title', response.data.blog.title);
                 setValue('body', response.data.blog.body);
