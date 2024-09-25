@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup';
+import api from '../configs/api';
 
 
 const Login = () => {
@@ -16,14 +17,23 @@ const Login = () => {
             .min(3, 'Username must be at least 3 characters long'),
         password: Yup.string()
             .required('Password is required')
-            .min(8, 'Password must be at least 8 characters long'),
+            .min(3, 'Password must be at least 8 characters long'),
     })
 
-    const { register, handleSubmit, formState: { errors }, }
+    const { register, handleSubmit, setError, formState: { errors, }, }
         = useForm({ resolver: yupResolver(validation) });
 
     const onSubmit = (data) => {
         console.log(data)
+        api.post('/login', data)
+            .then((res) => {
+                localStorage.setItem('token', res.data.token)
+                nav('/blog')
+            }).catch(e => {
+                const errField = e.response.data.field
+                const msg = e.response.data.message
+                setError(errField, { type: 'validate', message: msg })
+            })
     }
 
 

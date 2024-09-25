@@ -4,6 +4,7 @@ import Navigation from './components/Navigation'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Blog from './pages/Blog'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path='/about' element={<h1>about page</h1>} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/blog' element={<Blog />} />
       </Routes>
     </BrowserRouter>
   )
