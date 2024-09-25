@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const ITEM_HEIGHT = 48;
 
-export default function BlogMenu({ handleDelete, blog }) {
+export default function BlogMenu({ }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -56,7 +56,7 @@ export default function BlogMenu({ handleDelete, blog }) {
                 }}
             >
                 {options.map((option) => (
-                    <MenuItem key={option.label} sx={{ gap: 2 }} selected={option === 'Pyxis'} >
+                    <MenuItem key={option.label} sx={{ gap: 2 }}  >
                         {option.icon}
                         {option.label}
                     </MenuItem>
