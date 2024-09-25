@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import * as React from 'react';
+import formatDateTime from '../utility/formatDateTime';
 
 // CTRL + SHIFT + P
 
@@ -30,7 +31,7 @@ export default function BlogCard({ blog }) {
                     </IconButton>
                 }
                 title={blog.title}
-                subheader={blog.createdAt}
+                subheader={formatDateTime(blog.createdAt)}
             />
             <CardMedia
                 component="img"
