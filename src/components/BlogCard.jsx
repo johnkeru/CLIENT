@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import * as React from 'react';
 import formatDateTime from '../utility/formatDateTime';
+import BlogMenu from './BlogMenu';
 
 // CTRL + SHIFT + P
 
@@ -26,9 +27,7 @@ export default function BlogCard({ blog }) {
                     </Avatar>
                 }
                 action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
+                    <BlogMenu />
                 }
                 title={blog.title}
                 subheader={formatDateTime(blog.createdAt)}

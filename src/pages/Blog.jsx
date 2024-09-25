@@ -4,7 +4,6 @@ import api from '../configs/api'
 import BlogCard from '../components/BlogCard'
 
 const Blog = () => {
-    const { currentUser } = useUser()
     const [blogs, setBlogs] = useState([])
     useEffect(() => {
         api.get('/blogs')
@@ -15,7 +14,7 @@ const Blog = () => {
             {
                 blogs && blogs.length > 0 ?
                     blogs.map(blog => (
-                        <BlogCard key={blog._id} blog={blog} />
+                        <BlogCard key={blog._id} setBlogs={setBlogs} blog={blog} />
                     )) : 'No blog found'
             }
         </div>
