@@ -51,7 +51,7 @@ export default function BlogCard({ blog, methods }) {
                     </Avatar>
                 }
                 action={<BlogMenu blog={blog} methods={methods} />}
-                title={blog.title}
+                title={blog.user.username}
                 subheader={formatDateTime(blog.createdAt)}
             />
             <CardMedia

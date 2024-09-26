@@ -36,8 +36,9 @@ const Register = () => {
                 setToken(res.data.token)
                 nav('/blogs')
             }).catch(e => {
-                const errField = e.response.data.field
-                const msg = e.response.data.message
+                console.log(e)
+                const errField = e?.response?.data?.field
+                const msg = e?.response?.data?.message
                 setError(errField, { type: 'validate', message: msg })
             })
     }

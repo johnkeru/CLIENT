@@ -6,17 +6,21 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useUser } from '../context/UserContext';
 
 const ITEM_HEIGHT = 48;
 
 export default function BlogMenu({ blog, methods }) {
+    const { currentUser } = useUser()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
 
-    const options = [
+    const isAllow = blog.user._id === currentUser?._id
+
+    const options = isAllow ? [
         {
             label: 'View',
             icon: <VisibilityIcon />,
@@ -32,6 +36,12 @@ export default function BlogMenu({ blog, methods }) {
             icon: <DeleteIcon />,
             onClick: () => methods.handleDelete(blog),
         },
+    ] : [
+        {
+            label: 'View',
+            icon: <VisibilityIcon />,
+            onClick: () => methods.handleGoToBlog(blog)
+        }
     ];
 
     return (
