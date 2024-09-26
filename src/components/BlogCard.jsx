@@ -16,8 +16,6 @@ import { useUser } from '../context/UserContext'
 import BlogLikers from './BlogLikers';
 import { useSocket } from '../context/SocketContext';
 
-// CTRL + SHIFT + P
-
 export default function BlogCard({ blog, methods }) {
     const { socket } = useSocket()
     const { currentUser } = useUser()
@@ -31,7 +29,14 @@ export default function BlogCard({ blog, methods }) {
                 setLikes(res.data.likes)
                 setIsLike(res.data.isLike)
             })
-        socket.emit(`notification`, { title: `${currentUser.username} likes your ${blog.title} blog.`, blog, sender: currentUser })
+
+        blog.user._id === currentUser._id ?
+            undefined :
+            socket.emit(`notification`, {
+                title: `${currentUser.username} likes your ${blog.title} blog.`,
+                blog,
+                sender: currentUser
+            })
     }
 
     React.useEffect(() => {

@@ -36,7 +36,7 @@ const CreateBlog = () => {
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
         accept: { 'image/*': ['.png', '.jpg', '.jpeg'], },
-        maxSize: 2000000, // 2MB
+        maxSize: 10000000, //10MB
     });
 
     const onSubmit = async (data) => {

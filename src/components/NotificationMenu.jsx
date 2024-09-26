@@ -17,6 +17,7 @@ export default function NotificationMenu() {
 
     React.useEffect(() => {
         socket?.on('notification', (notif) => {
+            setHasNotification(true)
             setNotifications(prev => [...prev, notif])
         })
     }, [socket])
@@ -26,18 +27,19 @@ export default function NotificationMenu() {
             socket?.emit('create-room-notification', currentUser._id)
             api.get('/notifications')
                 .then(res => {
-                    console.log(res.data)
                     setNotifications(res.data.notifications)
                 })
         }
     }, [currentUser])
 
+    const [hasNotification, setHasNotification] = React.useState(false)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
+        setHasNotification(false)
         setAnchorEl(null);
     };
 
@@ -46,7 +48,7 @@ export default function NotificationMenu() {
             <IconButton
                 onClick={handleClick}
             >
-                <Badge color="error" variant="dot">
+                <Badge color="error" variant={!hasNotification ? "standard" : "dot"}>
                     <NotificationsIcon sx={{ color: 'white' }} />
                 </Badge>
             </IconButton>

@@ -29,7 +29,7 @@ const Blog = () => {
 
     return (
         <Box sx={{ py: 2 }}>
-            <Box sx={{ width: '50%', m: 'auto' }}>
+            <Box sx={{ width: { xs: '100%', sm: '80%', md: '50%' }, m: 'auto' }}>
                 <Paper elevation={2} sx={{ p: 2, mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography variant='h5'>Blogs</Typography>
                     <Button onClick={() => nav('/create-blog')} color='success' startIcon={<AddIcon />} variant='contained'>Add Blog</Button>
