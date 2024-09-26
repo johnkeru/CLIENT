@@ -14,11 +14,12 @@ import BlogMenu from './BlogMenu';
 import api from '../configs/api';
 import { useUser } from '../context/UserContext'
 import BlogLikers from './BlogLikers';
+import { useSocket } from '../context/SocketContext';
 
 // CTRL + SHIFT + P
 
 export default function BlogCard({ blog, methods }) {
-
+    const { socket } = useSocket()
     const { currentUser } = useUser()
 
     const [likes, setLikes] = React.useState(0)
@@ -30,8 +31,7 @@ export default function BlogCard({ blog, methods }) {
                 setLikes(res.data.likes)
                 setIsLike(res.data.isLike)
             })
-        // socket emit
-        // socket.emit(`${blog.user._id}-blog-like`, `${currentUser.username} likes your ${blog.title} blog.`)
+        socket.emit(`notification`, { title: `${currentUser.username} likes your ${blog.title} blog.`, blog, sender: currentUser })
     }
 
     React.useEffect(() => {
@@ -57,12 +57,12 @@ export default function BlogCard({ blog, methods }) {
             />
             <CardMedia
                 component="img"
-                height="194"
+                height="394"
                 image={blog.image}
                 alt="Paella dish"
             />
             {blog.body ? <CardContent>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                <Typography noWrap variant="body2" sx={{ color: 'text.secondary' }}>
                     {blog.body}
                 </Typography>
             </CardContent> : undefined}

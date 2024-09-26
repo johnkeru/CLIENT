@@ -16,11 +16,16 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../CONTEXT/UserContext';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { Badge } from '@mui/material';
+import { useSocket } from '../context/SocketContext'
+import NotificationMenu from './NotificationMenu';
 
 const drawerWidth = 240;
 
 
 function Navigation(props) {
+
     const nav = useNavigate()
     const { logout, currentUser } = useUser()
 
@@ -112,6 +117,9 @@ function Navigation(props) {
                     >
                         Facebook
                     </Typography>
+
+                    <NotificationMenu />
+
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
                             <Button onClick={() => handleNavigate(item)} key={item.label} sx={{ color: '#fff' }}>
