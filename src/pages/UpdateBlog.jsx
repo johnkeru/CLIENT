@@ -10,8 +10,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const schema = yup.object().shape({
     title: yup.string().required('Title is required'),
-    body: yup.string().required('Body is required'),
-    image: yup.mixed().required('Image is required'),
+    body: yup.string(),
+    image: yup.mixed(),
 });
 
 const UpdateBlog = () => {
@@ -50,18 +50,19 @@ const UpdateBlog = () => {
 
     const onSubmit = async (data) => {
         try {
-            const imageUrl = await uploadToCloudinary(data.image);
-            if (imageUrl) {
-                const formData = {
-                    title: data.title,
-                    body: data.body,
-                    image: imageUrl, // Store only the secure URL
-                };
-                api.put(`/blogs/${id}`, formData) // Use PUT for updating existing blog
-                    .then(() => nav('/blog'));
-            } else {
-                console.error('Image upload failed');
+            let formData = data
+            if (data.image) {
+                let imageUrl = await uploadToCloudinary(data.image);
+                if (imageUrl) {
+                    formData = {
+                        title: data.title,
+                        body: data.body,
+                        image: imageUrl, // Store only the secure URL
+                    };
+                }
             }
+            api.put(`/blogs/${id}`, formData) // Use PUT for updating existing blog
+                .then(() => nav('/blog'));
         } catch (error) {
             console.error('An error occurred during form submission', error);
         }
