@@ -22,7 +22,11 @@ const UserProvider = ({ children }) => {
         if (token || !!localStorage.getItem('token')) {
             api.get('/currentUser', { headers: { Authorization: `Bearer ${token}` } })
                 .then(res => setCurrentUser(res.data.user))
-                .catch(() => nav('/login'))
+                .catch(() => {
+                    setToken('')
+                    localStorage.removeItem('token')
+                    nav('/login')
+                })
         }
     }, [token])
 
