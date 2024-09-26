@@ -12,7 +12,6 @@ const uploadToCloudinary = async (file) => {
         const response = await axios.post(uploadURL, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
-        console.log(response);
         return response.data.secure_url;
     } catch (error) {
         return 'error';

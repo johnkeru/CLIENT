@@ -62,7 +62,7 @@ const UpdateBlog = () => {
                 }
             }
             api.put(`/blogs/${id}`, formData) // Use PUT for updating existing blog
-                .then(() => nav('/blog'));
+                .then(() => nav('/blogs'));
         } catch (error) {
             console.error('An error occurred during form submission', error);
         }

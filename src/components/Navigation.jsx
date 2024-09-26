@@ -35,8 +35,8 @@ function Navigation(props) {
                 label: 'About',
             },
             {
-                path: '/blog',
-                label: 'Blog',
+                path: '/blogs',
+                label: 'Blogs',
             },
             {
                 path: '/logout',

@@ -14,17 +14,16 @@ import BlogMenu from './BlogMenu';
 
 // CTRL + SHIFT + P
 
-export default function BlogCard({ blog, handleDelete, handleGoToEdit }) {
-
+export default function BlogCard({ blog, methods }) {
     return (
-        <Card sx={{ maxWidth: '100%', mb: 2, }}>
+        <Card sx={{ cursor: 'pointer', maxWidth: '100%', mb: 2, }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
                         {blog.user.username[0].toUpperCase()}
                     </Avatar>
                 }
-                action={<BlogMenu blog={blog} handleGoToEdit={handleGoToEdit} handleDelete={handleDelete} />}
+                action={<BlogMenu blog={blog} methods={methods} />}
                 title={blog.title}
                 subheader={formatDateTime(blog.createdAt)}
             />

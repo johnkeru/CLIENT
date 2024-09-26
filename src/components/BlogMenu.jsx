@@ -5,10 +5,11 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const ITEM_HEIGHT = 48;
 
-export default function BlogMenu({ blog, handleGoToEdit, handleDelete }) {
+export default function BlogMenu({ blog, methods }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -17,14 +18,19 @@ export default function BlogMenu({ blog, handleGoToEdit, handleDelete }) {
 
     const options = [
         {
+            label: 'View',
+            icon: <VisibilityIcon />,
+            onClick: () => methods.handleGoToBlog(blog)
+        },
+        {
             label: 'Edit',
             icon: <BorderColorIcon />,
-            onClick: () => handleGoToEdit(blog)
+            onClick: () => methods.handleGoToEdit(blog)
         },
         {
             label: 'Delete',
             icon: <DeleteIcon />,
-            onClick: () => handleDelete(blog),
+            onClick: () => methods.handleDelete(blog),
         },
     ];
 

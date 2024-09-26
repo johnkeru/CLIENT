@@ -55,7 +55,7 @@ const CreateBlog = () => {
             }
 
             api.post('/blogs', formData)
-                .then(() => nav('/blog'))
+                .then(() => nav('/blogs'))
         } catch (error) {
             console.error('An error occurred during form submission', error);
         }
