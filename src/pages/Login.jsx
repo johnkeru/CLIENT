@@ -30,7 +30,7 @@ const Login = () => {
             .then((res) => {
                 localStorage.setItem('token', res.data.token)
                 setToken(res.data.token)
-                nav('/blog')
+                nav('/blogs')
             }).catch(e => {
                 const errField = e.response.data.field
                 const msg = e.response.data.message

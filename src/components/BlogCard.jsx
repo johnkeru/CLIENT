@@ -29,6 +29,8 @@ export default function BlogCard({ blog, methods }) {
                 setLikes(res.data.likes)
                 setIsLike(res.data.isLike)
             })
+        // socket emit
+        // socket.emit(`${blog.user._id}-blog-like`, `${currentUser.username} likes your ${blog.title} blog.`)
     }
 
     React.useEffect(() => {
