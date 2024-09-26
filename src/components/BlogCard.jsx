@@ -13,6 +13,7 @@ import formatDateTime from '../utility/formatDateTime';
 import BlogMenu from './BlogMenu';
 import api from '../configs/api';
 import { useUser } from '../context/UserContext'
+import BlogLikers from './BlogLikers';
 
 // CTRL + SHIFT + P
 
@@ -69,7 +70,7 @@ export default function BlogCard({ blog, methods }) {
                 <IconButton aria-label="add to favorites" onClick={() => handleToggleLike()}>
                     <FavoriteIcon sx={{ color: isLike ? pink[500] : grey[500] }} />
                 </IconButton>
-                {likes}
+                <BlogLikers likes={likes} blog={blog} />
             </CardActions>
         </Card>
     );
