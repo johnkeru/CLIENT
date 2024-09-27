@@ -4,9 +4,9 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
-import { useSocket } from '../context/SocketContext';
+import { useSocket } from '../CONTEXT/SocketContext';
 import api from '../configs/api';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../CONTEXT/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 const ITEM_HEIGHT = 48;
