@@ -12,9 +12,9 @@ import * as React from 'react';
 import formatDateTime from '../utility/formatDateTime';
 import BlogMenu from './BlogMenu';
 import api from '../configs/api';
-import { useUser } from '../context/UserContext'
+import { useUser } from '../CONTEXT/UserContext'
 import BlogLikers from './BlogLikers';
-import { useSocket } from '../context/SocketContext';
+import { useSocket } from '../CONTEXT/SocketContext';
 
 export default function BlogCard({ blog, methods }) {
     const { socket } = useSocket()
