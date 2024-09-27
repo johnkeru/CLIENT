@@ -4,8 +4,8 @@ import React, { useEffect, useState, useCallback } from 'react'
 import formatDateTime from '../utility/formatDateTime'
 import SendIcon from '@mui/icons-material/Send';
 import autoScroll from '../utility/autoScroll';
-import { useSocket } from '../context/SocketContext'
-import { useUser } from '../context/UserContext'
+import { useSocket } from '../CONTEXT/SocketContext'
+import { useUser } from '../CONTEXT/UserContext'
 import api from '../configs/api';
 import { useDropzone } from 'react-dropzone';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
