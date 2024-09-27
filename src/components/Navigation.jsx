@@ -32,8 +32,8 @@ function Navigation(props) {
                 label: 'Home',
             },
             {
-                path: '/about',
-                label: 'About',
+                path: '/chat',
+                label: 'Chat',
             },
             {
                 path: '/blogs',

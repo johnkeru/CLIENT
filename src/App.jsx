@@ -11,6 +11,7 @@ import UpdateBlog from './pages/UpdateBlog'
 import ProtectedRoute from './middlewares/ProtectedRoute'
 import Blog from './pages/Blog'
 import SocketProvider from './context/SocketContext'
+import ChatArea from './pages/ChatArea'
 
 const App = () => {
 
@@ -21,10 +22,10 @@ const App = () => {
           <Navigation />
           <Routes>
             <Route path='/' element={<h1>Home page</h1>} />
-            <Route path='/about' element={<h1>about page</h1>} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
 
+            <Route path='/chat' element={<ProtectedRoute><ChatArea /></ProtectedRoute>} />
             <Route path='/blogs' element={<ProtectedRoute><Blogs /></ProtectedRoute>} />
             <Route path='/create-blog' element={<ProtectedRoute><CreateBlog /></ProtectedRoute>} />
             <Route path='/update-blog/:id' element={<ProtectedRoute><UpdateBlog /></ProtectedRoute>} />
