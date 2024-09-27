@@ -1,6 +1,7 @@
 import axios from 'axios'
+import loadEnv from '../utility/loadEnv'
 
-const api = axios.create({ baseURL: 'http://192.168.18.58:5000', })
+const api = axios.create({ baseURL: loadEnv('VITE_SERVER_URL'), })
 
 api.interceptors.request.use(
     config => {

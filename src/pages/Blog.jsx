@@ -1,10 +1,9 @@
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import formatDateTime from '../utility/formatDateTime'
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Avatar, Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import api from '../configs/api';
+import formatDateTime from '../utility/formatDateTime';
 
 const Blog = () => {
     const [blog, setBlog] = useState(null)
@@ -24,25 +23,23 @@ const Blog = () => {
                         {blog?.user.username[0].toUpperCase()}
                     </Avatar>
                 }
-                title={blog?.title}
+                title={blog?.user?.username}
                 subheader={formatDateTime(blog?.createdAt || new Date())}
             />
-            <CardMedia
+            {blog?.image && <CardMedia
                 component="img"
                 height="594"
-                image={blog?.image}
+                image={blog.image}
                 alt={blog?.title}
-            />
-            {blog?.body ? <CardContent>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            />}
+            <CardContent>
+                {blog?.title && <Typography noWrap variant="h6">
+                    {blog.title}
+                </Typography>}
+                {blog?.body ? <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                     {blog?.body}
-                </Typography>
-            </CardContent> : undefined}
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-            </CardActions>
+                </Typography> : undefined}
+            </CardContent>
         </Card>
     )
 }

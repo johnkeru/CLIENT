@@ -1,8 +1,9 @@
 import axios from 'axios';
+import loadEnv from './loadEnv';
 
 const uploadToCloudinary = async (file) => {
-    const uploadURL = "https://api.cloudinary.com/v1_1/daem3tpao/image/upload";
-    const uploadPreset = "nukutm1t";
+    const uploadURL = `https://api.cloudinary.com/v1_1/${loadEnv('VITE_CLOUDINARY_NAME')}/image/upload`;
+    const uploadPreset = loadEnv('VITE_CLOUDINARY_PRESET');
 
     const formData = new FormData();
     formData.append('file', file);

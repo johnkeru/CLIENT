@@ -6,11 +6,13 @@ import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
 import { useSocket } from '../context/SocketContext';
 import api from '../configs/api';
-import { useUser } from '../CONTEXT/UserContext';
+import { useUser } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const ITEM_HEIGHT = 48;
 
 export default function NotificationMenu() {
+    const nav = useNavigate()
     const { currentUser } = useUser();
     const { socket } = useSocket()
     const [notifications, setNotifications] = React.useState([])
@@ -18,7 +20,7 @@ export default function NotificationMenu() {
     React.useEffect(() => {
         socket?.on('notification', (notif) => {
             setHasNotification(true)
-            setNotifications(prev => [...prev, notif])
+            setNotifications(prev => [notif, ...prev])
         })
     }, [socket])
 
@@ -70,7 +72,7 @@ export default function NotificationMenu() {
                 }}
             >
                 {notifications.length > 0 ? notifications.map((notif) => (
-                    <MenuItem key={notif._id} onClick={handleClose}>
+                    <MenuItem key={notif._id} onClick={() => nav(`/blog/${notif.blog._id}`)}>
                         {notif.title}
                     </MenuItem>
                 )) : <MenuItem>No notifications yet.</MenuItem>}

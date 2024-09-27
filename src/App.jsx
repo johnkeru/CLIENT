@@ -13,6 +13,7 @@ import Blog from './pages/Blog'
 import SocketProvider from './context/SocketContext'
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <UserProvider>

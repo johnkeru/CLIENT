@@ -20,36 +20,35 @@ export default function BlogCard({ blog, methods }) {
     const { socket } = useSocket()
     const { currentUser } = useUser()
 
-    const [likes, setLikes] = React.useState(0)
+    const [likesCount, setLikesCount] = React.useState(0)
     const [isLike, setIsLike] = React.useState(false)
 
     const handleToggleLike = () => {
         api.post(`/blogs/${blog._id}/like`)
             .then(res => {
-                setLikes(res.data.likes)
+                setLikesCount(res.data.likesCount)
                 setIsLike(res.data.isLike)
             })
 
-        blog.user._id === currentUser._id ?
-            undefined :
+        // if you like your own blog you won't get notification
+        if (blog.user._id !== currentUser._id) {
             socket.emit(`notification`, {
-                title: `${currentUser.username} likes your ${blog.title} blog.`,
+                title: `${currentUser.username} ${isLike ? 'unlike' : 'likes'} your ${blog.title} blog.`,
                 blog,
                 sender: currentUser
             })
+        }
     }
 
     React.useEffect(() => {
-        setLikes(blog.likes.length)
+        setLikesCount(blog.likesCount)
         blog.likes.forEach(userId => {
-            if (currentUser?._id === userId._id) {
-                setIsLike(true)
-            }
+            if (currentUser?._id === userId) setIsLike(true)
         })
     }, [])
 
     return (
-        <Card sx={{ cursor: 'pointer', maxWidth: '100%', mb: 2, }}>
+        <Card sx={{ maxWidth: '100%', mb: 2, }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -60,22 +59,30 @@ export default function BlogCard({ blog, methods }) {
                 title={blog.user.username}
                 subheader={formatDateTime(blog.createdAt)}
             />
-            <CardMedia
+            {blog.image && <CardMedia
                 component="img"
-                height="394"
                 image={blog.image}
-                alt="Paella dish"
+                alt={blog.title}
+                style={{
+                    width: '100%',   // This makes the image take the full width of the container
+                    objectFit: 'cover', // This ensures the image covers the container while maintaining aspect ratio
+                }}
             />
-            {blog.body ? <CardContent>
-                <Typography noWrap variant="body2" sx={{ color: 'text.secondary' }}>
+            }
+            <CardContent>
+                {blog.title && <Typography noWrap variant="h6">
+                    {blog.title}
+                </Typography>}
+                {blog.body && <Typography noWrap variant="body2" sx={{ color: 'text.secondary' }}>
                     {blog.body}
-                </Typography>
-            </CardContent> : undefined}
+                </Typography>}
+            </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" onClick={() => handleToggleLike()}>
+                <IconButton aria-label="add to favorites"
+                    onClick={() => handleToggleLike()}>
                     <FavoriteIcon sx={{ color: isLike ? pink[500] : grey[500] }} />
                 </IconButton>
-                <BlogLikers likes={likes} blog={blog} />
+                <BlogLikers likesCount={likesCount} blog={blog} />
             </CardActions>
         </Card>
     );

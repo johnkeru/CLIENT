@@ -16,6 +16,7 @@ const schema = yup.object().shape({
 
 const UpdateBlog = () => {
     const { id } = useParams();
+    const [loading, setLoading] = useState(false)
     const [preview, setPreview] = useState('');
     const nav = useNavigate();
 
@@ -50,6 +51,7 @@ const UpdateBlog = () => {
 
     const onSubmit = async (data) => {
         try {
+            setLoading(true)
             let formData = data
             if (data.image) {
                 let imageUrl = await uploadToCloudinary(data.image);
@@ -62,7 +64,10 @@ const UpdateBlog = () => {
                 }
             }
             api.put(`/blogs/${id}`, formData) // Use PUT for updating existing blog
-                .then(() => nav('/blogs'));
+                .then(() => {
+                    setLoading(false)
+                    nav('/blogs')
+                });
         } catch (error) {
             console.error('An error occurred during form submission', error);
         }
@@ -148,9 +153,8 @@ const UpdateBlog = () => {
                     }}
                 />
             )}
-
-            <Button size='large' type="submit" variant="contained" color="primary" fullWidth>
-                Submit
+            <Button size='large' disabled={loading} type="submit" variant="contained" color="primary" fullWidth>
+                {loading ? 'Loading...' : 'Submit'}
             </Button>
         </Box>
     );

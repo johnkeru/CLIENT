@@ -7,6 +7,7 @@ import { useDropzone } from 'react-dropzone';
 import uploadToCloudinary from '../utility/uploadToCloudinary';
 import api from '../configs/api'
 import { useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext';
 
 const schema = yup.object().shape({
     title: yup.string().required('Title is required'),
@@ -15,6 +16,9 @@ const schema = yup.object().shape({
 });
 
 const CreateBlog = () => {
+    const { currentUser } = useUser()
+    const [loading, setLoading] = useState(false)
+
     const [preview, setPreview] = useState('')
     const nav = useNavigate()
     const {
@@ -41,21 +45,22 @@ const CreateBlog = () => {
 
     const onSubmit = async (data) => {
         try {
-            let formData = data
-
+            setLoading(true)
+            let formData = Object.assign(data, { user: currentUser._id })
             if (data.image) {
                 let imageUrl = await uploadToCloudinary(data.image);
                 if (imageUrl) {
                     formData = {
-                        title: data.title,
-                        body: data.body,
+                        ...formData,
                         image: imageUrl, // Store only the secure URL
                     };
                 }
             }
-
             api.post('/blogs', formData)
-                .then(() => nav('/blogs'))
+                .then(() => {
+                    setLoading(false)
+                    nav('/blogs')
+                })
         } catch (error) {
             console.error('An error occurred during form submission', error);
         }
@@ -133,8 +138,8 @@ const CreateBlog = () => {
                 <Box sx={{ width: 200, height: 200, mx: 'auto', my: 2, backgroundImage: `url('${preview}')`, backgroundSize: 'cover', }} />
             )}
 
-            <Button size='large' type="submit" variant="contained" color="primary" fullWidth>
-                Submit
+            <Button size='large' disabled={loading} type="submit" variant="contained" color="primary" fullWidth>
+                {loading ? 'Loading...' : 'Submit'}
             </Button>
         </Box>
     );
