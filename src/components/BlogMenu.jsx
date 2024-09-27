@@ -6,7 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../CONTEXT/UserContext';
 
 const ITEM_HEIGHT = 48;
 
