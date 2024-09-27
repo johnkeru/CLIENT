@@ -7,7 +7,7 @@ import { useDropzone } from 'react-dropzone';
 import uploadToCloudinary from '../utility/uploadToCloudinary';
 import api from '../configs/api'
 import { useNavigate } from 'react-router-dom'
-import { useUser } from '../context/UserContext';
+import { useUser } from '../CONTEXT/UserContext';
 
 const schema = yup.object().shape({
     title: yup.string().required('Title is required'),
