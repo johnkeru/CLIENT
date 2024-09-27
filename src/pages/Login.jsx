@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import api from '../configs/api';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../CONTEXT/UserContext';
 
 
 const Login = () => {
