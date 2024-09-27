@@ -15,7 +15,7 @@ const uploadToCloudinary = async (file) => {
         });
         return response.data.secure_url;
     } catch (error) {
-        return 'error';
+        return '';
     }
 };
 

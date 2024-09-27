@@ -18,7 +18,6 @@ const schema = yup.object().shape({
 const CreateBlog = () => {
     const { currentUser } = useUser()
     const [loading, setLoading] = useState(false)
-
     const [preview, setPreview] = useState('')
     const nav = useNavigate()
     const {
