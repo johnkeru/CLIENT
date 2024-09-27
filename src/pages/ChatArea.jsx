@@ -74,10 +74,9 @@ const ChatArea = () => {
 
     return (
         <Paper elevation={12} sx={{
-            width: '80%',
+            width: { xs: '100%', md: '80%' },
             m: 'auto',
-            mt: 2,
-            height: '84vh',
+            height: '90vh',
             overflow: 'auto',
             position: 'relative'
         }} className='chat-body'>
@@ -90,7 +89,7 @@ const ChatArea = () => {
                             <Box key={msg._id} sx={{ bgcolor: blue[500], p: 1.5, ml: 'auto', borderRadius: 5, color: 'white', width: 'fit-content' }}>
                                 <Typography>{msg.sender.username}</Typography>
                                 {
-                                    msg?.image && <Box sx={{ width: '350px', height: '350px' }}>
+                                    msg?.image && <Box sx={{ width: '100%', height: '100%' }}>
                                         <img style={{ width: '100%', height: '100%' }} src={msg.image} />
                                     </Box>
                                 }
@@ -100,7 +99,7 @@ const ChatArea = () => {
                             <Box key={msg._id} sx={{ bgcolor: grey[500], p: 1.5, borderRadius: 5, color: 'white', width: 'fit-content' }}>
                                 <Typography>{msg.sender.username}</Typography>
                                 {
-                                    msg?.image && <Box sx={{ width: '350px', height: '350px' }}>
+                                    msg?.image && <Box sx={{ width: '100%', height: '100%' }}>
                                         <img style={{ width: '100%', height: '100%' }} src={msg.image} />
                                     </Box>
                                 }
